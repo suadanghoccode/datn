@@ -1,0 +1,191 @@
+CREATE TABLE `phanquyen` (
+  `id_phanquyen` int NOT NULL AUTO_INCREMENT,
+  `tenphanquyen` varchar(30) NOT NULL,
+  `mota` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_phanquyen`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `trangthai` (
+  `id_trangthai` int NOT NULL AUTO_INCREMENT,
+  `tentrangthai` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_trangthai`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `loaitau` (
+  `id_loaitau` int NOT NULL AUTO_INCREMENT,
+  `tenloaitau` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_loaitau`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `chucvu` (
+  `id_chucvu` int NOT NULL AUTO_INCREMENT,
+  `tenchucvu` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_chucvu`),
+  UNIQUE KEY `tenchucvu_UNIQUE` (`tenchucvu`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `chungchi` (
+  `id_chungchi` int NOT NULL AUTO_INCREMENT,
+  `tenchungchi` varchar(45) NOT NULL,
+  `tieuchuanapdung` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_chungchi`),
+  UNIQUE KEY `tenchungchi_UNIQUE` (`tenchungchi`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `hopdong` (
+  `id_hopdong` int NOT NULL AUTO_INCREMENT,
+  `tenhopdong` varchar(45) NOT NULL,
+  PRIMARY KEY (`id_hopdong`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `user` (
+  `taikhoan` varchar(30) NOT NULL,
+  `matkhau` varchar(30) NOT NULL,
+  `phanquyen_id` int NOT NULL,
+  PRIMARY KEY (`taikhoan`),
+  KEY `user_phanquyen_idx` (`phanquyen_id`),
+  CONSTRAINT `user_phanquyen` FOREIGN KEY (`phanquyen_id`) REFERENCES `phanquyen` (`id_phanquyen`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `thuyenvien` (
+  `id_thuyenvien` int NOT NULL AUTO_INCREMENT,
+  `anh` varchar(100) NOT NULL,
+  `hoten` varchar(45) NOT NULL,
+  `cccd` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `sodienthoai` varchar(45) NOT NULL,
+  `chieucao` int NOT NULL,
+  `cannang` float NOT NULL,
+  `nhommau` varchar(5) NOT NULL,
+  `sizegiay` int NOT NULL,
+  `tinhtranghonnhan` varchar(20) NOT NULL,
+  PRIMARY KEY (`id_thuyenvien`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `tau` (
+  `id_tau` int NOT NULL AUTO_INCREMENT,
+  `tentau` varchar(45) NOT NULL,
+  `quoctich` varchar(30) NOT NULL,
+  `loaitau_id` int NOT NULL,
+  PRIMARY KEY (`id_tau`),
+  KEY `tau_loaitau_idx` (`loaitau_id`),
+  CONSTRAINT `tau_loaitau` FOREIGN KEY (`loaitau_id`) REFERENCES `loaitau` (`id_loaitau`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `chuyentau` (
+  `id_chuyentau` int NOT NULL,
+  `tau_id` int NOT NULL,
+  `ngaydukien` date NOT NULL,
+  PRIMARY KEY (`id_chuyentau`),
+  KEY `chuyentau_tau_idx` (`tau_id`),
+  CONSTRAINT `chuyentau_tau` FOREIGN KEY (`tau_id`) REFERENCES `tau` (`id_tau`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `bangluong` (
+  `id_bangluong` int NOT NULL AUTO_INCREMENT,
+  `thuyenvien_id` int NOT NULL,
+  `luongcb` decimal(10,0) NOT NULL,
+  `tigia` decimal(10,0) NOT NULL,
+  `phuongthuc` varchar(45) NOT NULL,
+  `thoigian` date NOT NULL,
+  PRIMARY KEY (`id_bangluong`),
+  KEY `thuyenvien_bangluong_idx` (`thuyenvien_id`),
+  CONSTRAINT `bangluong_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `thannhan` (
+  `id_thannhan` int NOT NULL,
+  `thuyenvien_id` int NOT NULL,
+  `hotenbo` varchar(45) DEFAULT NULL,
+  `sdtbo` varchar(11) DEFAULT NULL,
+  `hotenme` varchar(45) DEFAULT NULL,
+  `sdtme` varchar(11) DEFAULT NULL,
+  `hotenvo` varchar(45) DEFAULT NULL,
+  `sdtvo` varchar(11) DEFAULT NULL,
+  `nguoigiamho` varchar(45) DEFAULT NULL,
+  `sdtgiamho` varchar(11) DEFAULT NULL,
+  `diachi` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id_thannhan`),
+  KEY `thannhan_thuyenvien_idx` (`thuyenvien_id`),
+  CONSTRAINT `thannhan_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `taikhoannganhang` (
+  `thuyenvien_id` int NOT NULL,
+  `stk` varchar(15) NOT NULL,
+  `tentaikhoan` varchar(45) NOT NULL,
+  PRIMARY KEY (`thuyenvien_id`),
+  CONSTRAINT `nganhang_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `lichsuditau` (
+  `id_lichsuditau` int NOT NULL AUTO_INCREMENT,
+  `thuyenvien_id` int NOT NULL,
+  `chucvu_id` int NOT NULL,
+  `chuyentau_id` int NOT NULL,
+  `time_xuatcanh` DATETIME NULL, 
+  `time_lentau` DATETIME NULL, 
+  `time_xuattau` DATETIME NULL, 
+  `cang_roitau` varchar(50) NULL,
+  `hoanthanh` TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id_lichsuditau`),
+  KEY `lichsuditau_thuyenvien_idx` (`thuyenvien_id`),
+  KEY `lichsuditau_chucvu_idx` (`chucvu_id`),
+  KEY `lichsuditau_chuyentau_idx` (`chuyentau_id`),
+  CONSTRAINT `lichsuditau_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`),
+  CONSTRAINT `lichsuditau_chucvu` FOREIGN KEY (`chucvu_id`) REFERENCES `chucvu` (`id_chucvu`),
+  CONSTRAINT `lichsuditau_chuyentau` FOREIGN KEY (`chuyentau_id`) REFERENCES `chuyentau` (`id_chuyentau`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+
+CREATE TABLE `thuyenvien_chungchi` (
+  `id_thuyenvien_chungchi` int NOT NULL AUTO_INCREMENT,
+  `thuyenvien_id` int NOT NULL,
+  `chungchi_id` int NOT NULL,
+  `sohieuchungchi` varchar(20) NOT NULL,
+  `ngaycap` datetime NOT NULL,
+  `ngayhethan` datetime NOT NULL,
+  `noicap` varchar(100) NOT NULL,
+  `hangbangcap` varchar(30) NOT NULL,
+  PRIMARY KEY (`id_thuyenvien_chungchi`),
+  KEY `chitiet_thuyenvien_chungchi_idx` (`thuyenvien_id`),
+  KEY `chitiet_chungchi_idx` (`chungchi_id`),
+  CONSTRAINT `tvcc_chungchi` FOREIGN KEY (`chungchi_id`) REFERENCES `chungchi` (`id_chungchi`),
+  CONSTRAINT `tvcc_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `thuyenvien_hopdong` (
+  `id_thuyenvien_hopdong` int NOT NULL AUTO_INCREMENT,
+  `thuyenvien_id` int NOT NULL,
+  `hopdong_id` int NOT NULL,
+  `ngayky` datetime NOT NULL,
+  `ngayhethan` datetime NOT NULL,
+  `trangthaihopdong` varchar(45) NOT NULL,
+  `hinhanh` varchar(100) NOT NULL,
+  PRIMARY KEY (`id_thuyenvien_hopdong`),
+  KEY `chitiet_hopdong_thuyenvien_idx` (`thuyenvien_id`),
+  KEY `chitiet_hopdong_idx` (`hopdong_id`),
+  CONSTRAINT `tvhd_hopdong` FOREIGN KEY (`hopdong_id`) REFERENCES `hopdong` (`id_hopdong`),
+  CONSTRAINT `tvhd_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `thuyenvien_trangthai` (
+  `thuyenvien_id` int NOT NULL,
+  `trangthai_id` int NOT NULL,
+  `thoigian` datetime DEFAULT NULL,
+  PRIMARY KEY (`thuyenvien_id`),
+  KEY `chitiet_trangthai_idx` (`trangthai_id`),
+  CONSTRAINT `tvtt_thuyenvieni` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`),
+  CONSTRAINT `tvtt_trangthai` FOREIGN KEY (`trangthai_id`) REFERENCES `trangthai` (`id_trangthai`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `chucvu_chungchi` (
+  `id_chungchi_chucvu` int NOT NULL AUTO_INCREMENT,
+  `chucvu_id` int NOT NULL,
+  `chungchi_id` int NOT NULL,
+  PRIMARY KEY (`id_chungchi_chucvu`),
+  KEY `cvcc_chucvu_idx` (`chucvu_id`),
+  KEY `cvcc_chungchi_idx` (`chungchi_id`),
+  CONSTRAINT `cvcc_chucvu` FOREIGN KEY (`chucvu_id`) REFERENCES `chucvu` (`id_chucvu`),
+  CONSTRAINT `cvcc_chungchi` FOREIGN KEY (`chungchi_id`) REFERENCES `chungchi` (`id_chungchi`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

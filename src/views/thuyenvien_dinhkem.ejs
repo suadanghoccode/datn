@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>PITSCO Crew Management System - Users</title>
+
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <link href="css/style.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <div id="wrapper">
+
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
+                <div class="sidebar-brand-icon logo">
+                    <img src="img/logo.png" alt="PITSCO Logo" style="height: 40px;">
+                </div>
+            </a>
+                    
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Bảng điều khiển</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/users">
+                    <i class="fas fa-user-shield"></i>
+                    <span>Danh sách tài khoản</span></a>
+            </li>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/crews">
+                    <i class="fas fa-users"></i>
+                    <span>Danh sách thuyền viên</span></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                    aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Hồ sơ chứng chỉ</span>
+                </a>
+                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/cer-expiring">Sắp đến hạn</a>
+                        <a class="collapse-item" href="/cer-expired">Đã quá hạn</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+                    aria-expanded="true" aria-controls="collapsePages">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Hợp đồng</span>
+                </a>
+                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/con-list">Danh sách hợp đồng</a>
+                        <a class="collapse-item" href="/con-expiring">Sắp đến hạn</a>
+                        <a class="collapse-item" href="/con-expired">Đã quá hạn</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item">
+                <a class="nav-link" href="/payroll">
+                    <i class="fas fa-money-bill-wave"></i>
+                    <span>Bảng lương</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-archive"></i>
+                    <span>Danh mục tài liệu</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="/list-job">Danh sách chức danh</a>
+                        <a class="collapse-item" href="/list-ship">Danh sách tàu</a>
+                        <a class="collapse-item" href="/list-cer">Danh sách chứng chỉ</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <div id="content">
+
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <span class="badge badge-danger badge-counter">2+</span>
+                            </a>
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Thông báo
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">19/3/2025</div>
+                                        <span class="font-weight-bold">Có 1 hợp đồng sắp hết hạn</span>
+                                    </div>
+                                </a>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-warning">
+                                            <i class="fas fa-exclamation-triangle text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">19/3/2024</div>
+                                        Có 1 chứng chỉ sắp hết hạn
+                                    </div>
+                                </a>
+                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                            </div>
+                        </li>
+
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                                <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user-lock mr-2 text-gray-400"></i>
+                                    Quản trị viên
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Tài khoản
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cài đặt
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Đăng xuất
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <div class="container-fluid">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Thông tin thuyền viên</h1>
+                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-file-export fa-sm text-white-50"></i> Xuất thông tin
+                        </a>
+                    </div>
+
+                    <!-- Tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crew-personal-info">Thông tin cá nhân</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crew-family-info">Thông tin gia đình</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crew-education-info">Học vấn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crew-language-certificates">Chứng chỉ ngoại ngữ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crew-certificates">Chứng chỉ thuyền viên</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/crew-sailing-history">Lịch sử đi tàu</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/crew-attachments">Tài liệu đính kèm</a>
+                        </li>
+                    </ul>
+
+                    <!-- Nội dung tab sẽ được load vào đây -->
+                    <div class="tab-content mt-3">
+                        <div id="tab-content" class="card shadow mb-4">
+                            <div class="card-body">
+                                <h5 class="text-primary d-inline-block">Tài liệu đính kèm</h5>
+                                <a href="#" class="ml-2" data-toggle="modal" data-target="#editDocumentModal">
+                                    <i class="fas fa-edit text-primary" style="font-size: 20px;"></i>
+                                </a>
+                                <div class="row">
+                                    <!-- CCCD Mặt Trước -->
+                                    <div class="col-md-2">
+                                        <img src="img/cccd-1.jpg" class="img-fluid img-thumbnail" data-toggle="modal"
+                                            data-target="#modalCCCDFront">
+                                        <p class="text-center small">CCCD (Mặt trước)</p>
+                                    </div>
+
+                                    <!-- CCCD Mặt Sau -->
+                                    <div class="col-md-2">
+                                        <img src="img/cccd-1.jpg" class="img-fluid img-thumbnail" data-toggle="modal"
+                                            data-target="#modalCCCDBack">
+                                        <p class="text-center small">CCCD (Mặt sau)</p>
+                                    </div>
+
+                                    <!-- Vaccine -->
+                                    <div class="col-md-2">
+                                        <img src="img/xac-nhan-tiem-vacxin-covid-19.jpg" class="img-fluid img-thumbnail"
+                                            data-toggle="modal" data-target="#modalVaccine">
+                                        <p class="text-center small">Phiếu tiêm vaccine</p>
+                                    </div>
+
+                                    <!-- Vàng da -->
+                                    <div class="col-md-2">
+                                        <img src="img/vang-da.jpg" class="img-fluid img-thumbnail" data-toggle="modal"
+                                            data-target="#modalVangDa">
+                                        <p class="text-center small">Chứng nhận vàng da</p>
+                                    </div>
+                                </div>
+
+                                <!-- MODAL HIỂN THỊ ẢNH LỚN -->
+                                <!-- CCCD Mặt Trước -->
+                                <div class="modal fade" id="modalCCCDFront" tabindex="-1"
+                                    aria-labelledby="modalLabelCCCDFront" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">CCCD - Mặt trước</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <img src="img/cccd-1.jpg" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- CCCD Mặt Sau -->
+                                <div class="modal fade" id="modalCCCDBack" tabindex="-1"
+                                    aria-labelledby="modalLabelCCCDBack" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">CCCD - Mặt sau</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <img src="img/cccd-1.jpg" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Vaccine -->
+                                <div class="modal fade" id="modalVaccine" tabindex="-1"
+                                    aria-labelledby="modalLabelVaccine" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Phiếu tiêm vaccine Covid</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <img src="img/xac-nhan-tiem-vacxin-covid-19.jpg" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Vàng da -->
+                                <div class="modal fade" id="modalVangDa" tabindex="-1"
+                                    aria-labelledby="modalLabelVangDa" aria-hidden="true">
+                                    <div class="modal-dialog modal-lg">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Chứng nhận vàng da</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body text-center">
+                                                <img src="img/vang-da.jpg" class="img-fluid">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MODAL CHỈNH SỬA TÀI LIỆU -->
+                    <div class="modal fade" id="editDocumentModal" tabindex="-1" role="dialog"
+                        aria-labelledby="editDocumentModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Chỉnh sửa tài liệu đính kèm</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form id="editDocumentForm">
+                                        <!-- CCCD Mặt Trước -->
+                                        <div class="form-group text-center">
+                                            <label>CCCD (Mặt trước)</label>
+                                            <img id="previewCCCDFront" src="img/cccd-1.jpg" class="img-thumbnail mb-2"
+                                                width="150">
+                                            <input type="file" class="form-control-file" id="inputCCCDFront"
+                                                accept="image/*">
+                                        </div>
+
+                                        <!-- CCCD Mặt Sau -->
+                                        <div class="form-group text-center">
+                                            <label>CCCD (Mặt sau)</label>
+                                            <img id="previewCCCDBack" src="img/cccd-1.jpg" class="img-thumbnail mb-2"
+                                                width="150">
+                                            <input type="file" class="form-control-file" id="inputCCCDBack"
+                                                accept="image/*">
+                                        </div>
+
+                                        <!-- Phiếu tiêm vaccine -->
+                                        <div class="form-group text-center">
+                                            <label>Phiếu tiêm vaccine</label>
+                                            <img id="previewVaccine" src="img/xac-nhan-tiem-vacxin-covid-19.jpg"
+                                                class="img-thumbnail mb-2" width="150">
+                                            <input type="file" class="form-control-file" id="inputVaccine"
+                                                accept="image/*">
+                                        </div>
+
+                                        <!-- Chứng nhận vàng da -->
+                                        <div class="form-group text-center">
+                                            <label>Chứng nhận vàng da</label>
+                                            <img id="previewVangDa" src="img/vang-da.jpg" class="img-thumbnail mb-2"
+                                                width="150">
+                                            <input type="file" class="form-control-file" id="inputVangDa"
+                                                accept="image/*">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                                    <button type="button" class="btn btn-primary" id="saveDocumentChanges">Lưu thay
+                                        đổi</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; PITSCO Crew Management System 2025 </span>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+    </div>
+
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Bạn chắc chắc muốn rời đi?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Chọn "Đăng xuất" bên dưới nếu bạn sẵn sàng kết thúc phiên hiện tại của mình.
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                    <a class="btn btn-primary" href="/login">Đăng xuất</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <script src="js/style.js"></script>
+
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="js/demo/datatables-demo.js"></script>
+
+</body>
+
+</html>
