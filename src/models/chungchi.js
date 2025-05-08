@@ -1,24 +1,26 @@
 'use strict';
+const { Model } = require('sequelize');
 
-export default (sequelize, DataTypes) => {
-    const ChungChi = sequelize.define('ChungChi', {
+module.exports = (sequelize, DataTypes) => {
+    class chungchi extends Model {
+        static associate(models) {
+            // define association here
+        }
+    }
+
+    chungchi.init({
         id_chungchi: {
             type: DataTypes.INTEGER,
-            autoIncrement: true,
-            primaryKey: true
+            primaryKey: true,          
+            autoIncrement: true        
         },
-        tenchungchi: {
-            type: DataTypes.STRING(45),
-            allowNull: false,
-            unique: true
-        },
-        tieuchuanapdung: {
-            type: DataTypes.STRING(45),
-            allowNull: false
-        }
+        tenchungchi: DataTypes.STRING,
+        tieuchuanapdung: DataTypes.STRING
     }, {
-        tableName: 'chungchi',
-        timestamps: false
+        sequelize,
+        modelName: 'chungchi',      
+        freezeTableName: true      
     });
-    return ChungChi;
+
+    return chungchi;
 };

@@ -10,12 +10,12 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             tenchungchi: {
-                type: Sequelize.STRING(45),
+                type: Sequelize.STRING,
                 allowNull: false,
                 unique: true
             },
             tieuchuanapdung: {
-                type: Sequelize.STRING(45),
+                type: Sequelize.STRING,
                 allowNull: false
             },
             createdAt: {

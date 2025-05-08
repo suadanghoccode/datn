@@ -17,4 +17,4 @@ let connectDB = async () => {
     }
 };
 
-module.exports = { sequelize, connectDB };
+module.exports = connectDB;
