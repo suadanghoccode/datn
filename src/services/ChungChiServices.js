@@ -14,8 +14,20 @@ let createNewChungChi = async(data) => {
     })
 
 }
-
+let getAllChungChi = () => {
+    return new Promise(async(resolve, reject) => {
+        try{
+            let chungchis = db.chungchi.findAll({
+                raw:true,
+            });
+            resolve(chungchis);
+        }catch(e){
+            reject(e);
+        }
+    })
+    
+}
 module.exports = {
     createNewChungChi: createNewChungChi,
-
+    getAllChungChi : getAllChungChi,
 }

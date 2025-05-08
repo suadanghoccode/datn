@@ -243,19 +243,20 @@
                                         </tr>
                                     </thead>
                                     <tbody id="danhSach">
-                                        <% data.forEach(function(item) { %>
-                                        <tr onclick="chonDong(this, event)">
-                                            <td><input type="checkbox" class="row-checkbox"></td>
-                                            <td><%= item.id_chungchi %></td>
-                                            <td class="ten"><%= item.tenchungchi %></td>
-                                            <td class="ten"><%= item.tieuchuanapdung %></td>
-                                            <td>
-                                                <button class="btn btn-warning btn-sm"
-                                                    onclick="suaChucDanh(this)">Sửa</button>
-                                            </td>
-                                        </tr>
+                                        <% for(let i = 0; i<dataTable.length; i++){ %>
+                                            <tr onclick="chonDong(this, event)">
+                                                <td><input type="checkbox" class="row-checkbox"></td>
+                                                <td><%= dataTable[i].id_chungchi %></td>
+                                                <td class="ten"><%= dataTable[i].tenchungchi %></td>
+                                                <td class="ten"><%= dataTable[i].tieuchuanapdung %></td>
+                                                <td>
+                                                    <button class="btn btn-warning btn-sm"
+                                                        onclick="suaChucDanh(this)">Sửa</button>
+                                                </td>
+                                            </tr>
+                                        <% } %>
+                                        
 
-                                        <% }); %>
                                     </tbody>
                                 </table>
                             </div>
