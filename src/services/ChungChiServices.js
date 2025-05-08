@@ -63,11 +63,25 @@ let updateChungChiData = (data) => {
         }
     });
 }
-
+let deleteChungChi = (chungchi_id) => {
+    return new Promise(async (resolve, reject) => {
+        try{
+            let chungchi = await db.chungchi.findOne({
+                where: {id_chungchi:chungchi_id}
+            })
+            if(chungchi ){
+                await chungchi.destroy();
+            }
+            resolve();
+        }catch(e){
+            reject(e);
+        }
+    })
+}
 module.exports = {
     createNewChungChi: createNewChungChi,
     getAllChungChi : getAllChungChi,
     getChungChiId : getChungChiId,
     updateChungChiData: updateChungChiData,
-
+    deleteChungChi: deleteChungChi
 }

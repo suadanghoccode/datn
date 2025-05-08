@@ -9,6 +9,7 @@ const initWebRoutes = (app) => {
     router.post('/post-chungchi', ChungChiController.postChungChi);
     router.post('/edit-chungchi', ChungChiController.getEditChungChi);
     router.post('/put-chungchi', ChungChiController.putChungChi);
+    router.post('/delete-chungchi', ChungChiController.deleteChungChi);
     app.use("/", router);
 };
 

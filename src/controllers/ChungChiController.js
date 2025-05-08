@@ -30,9 +30,24 @@ let putChungChi = async(req, res) => {
         res.send('Lỗi: ' + error.message);
     }
 }
+
+let deleteChungChi = async (req, res) => {
+    let ids = req.body.id; // => mảng id
+    if (!Array.isArray(ids)) {
+        ids = [ids]; // nếu gửi 1 id thì cho thành mảng luôn
+    }
+
+    for (let id of ids) {
+        await ChungChiServices.deleteChungChi(id);
+    }
+
+    return res.redirect('/danh-sach-chung-chi');
+};
+
 module.exports = {
     getAllChungChi : getAllChungChi,
     postChungChi: postChungChi,
     getEditChungChi: getEditChungChi,
     putChungChi: putChungChi,
+    deleteChungChi: deleteChungChi
 }
