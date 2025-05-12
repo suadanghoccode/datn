@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
         tieuchuanapdung: DataTypes.STRING
     }, {
         sequelize,
-        modelName: 'chungchi',      
+        tableName: 'chungchi',
+        modelName: 'Chungchi',      
         freezeTableName: true      
     });
 
