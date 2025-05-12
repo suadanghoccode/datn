@@ -2,13 +2,13 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class chucvu extends Model {
+    class Chucvu extends Model {
         static associate(models) {
-            // define association here
+            
         }
     }
 
-    chucvu.init({
+    Chucvu.init({
         id_chucvu: {
             type: DataTypes.INTEGER,
             primaryKey: true,          
@@ -21,5 +21,5 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true      
     });
 
-    return chucvu;
+    return Chucvu;
 };

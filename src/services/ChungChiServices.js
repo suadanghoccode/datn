@@ -3,7 +3,7 @@ import db from '../models/index';
 let createNewChungChi = async(data) => {
     return new Promise(async(resolve, reject) => {
         try {
-            const result = await db.chungchi.create({
+            const result = await db.Chungchi.create({
                 tenchungchi: data.tenchungchi,
                 tieuchuanapdung: data.tieuchuanapdung
             })
@@ -17,7 +17,7 @@ let createNewChungChi = async(data) => {
 let getAllChungChi = () => {
     return new Promise(async(resolve, reject) => {
         try{
-            let chungchis = db.chungchi.findAll({
+            let chungchis = db.Chungchi.findAll({
                 raw:true,
             });
             resolve(chungchis);
@@ -30,7 +30,7 @@ let getAllChungChi = () => {
 let getChungChiId = (chungchi_id) => {
     return new Promise (async(resolve, reject) => {
         try {
-            let chungchi = await db.chungchi.findOne({
+            let chungchi = await db.Chungchi.findOne({
                 where : {id : chungchi_id}
             })
             if (chungchi){
@@ -47,7 +47,7 @@ let getChungChiId = (chungchi_id) => {
 let updateChungChiData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            await db.chungchi.update(
+            await db.Chungchi.update(
                 {
                     tenchungchi: data.tenchungchi,
                     tieuchuanapdung: data.tieuchuanapdung
@@ -66,7 +66,7 @@ let updateChungChiData = (data) => {
 let deleteChungChi = (chungchi_id) => {
     return new Promise(async (resolve, reject) => {
         try{
-            let chungchi = await db.chungchi.findOne({
+            let chungchi = await db.Chungchi.findOne({
                 where: {id_chungchi:chungchi_id}
             })
             if(chungchi ){
