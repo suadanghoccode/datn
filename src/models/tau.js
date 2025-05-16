@@ -4,7 +4,6 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Tau extends Model {
         static associate(models) {
-            // Định nghĩa quan hệ với bảng loaitau
             
         }
     }

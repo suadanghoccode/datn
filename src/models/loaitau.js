@@ -4,7 +4,7 @@ const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
     class Loaitau extends Model {
         static associate(models) {
-            // Định nghĩa các quan hệ nếu cần thiết
+            
         }
     }
 

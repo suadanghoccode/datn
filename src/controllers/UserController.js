@@ -13,6 +13,15 @@ let getAllUser = async (req, res) => {
     }
 };
 
+let getBangLuong = async (req, res) => {
+    return res.render('danhsach_bangluong.ejs');
+}
+let getThuyenVienBangLuong = async (req, res) => {
+    return res.render('danhsach_thuyenvien_luong.ejs');
+}
+
 module.exports = {
     getAllUser : getAllUser,
+    getBangLuong : getBangLuong,
+    getThuyenVienBangLuong: getThuyenVienBangLuong
 }
