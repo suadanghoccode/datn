@@ -143,18 +143,16 @@ CREATE TABLE `thuyenvien_chungchi` (
   CONSTRAINT `tvcc_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-CREATE TABLE `thuyenvien_hopdong` (
-  `id_thuyenvien_hopdong` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `hopdong` (
+  `id_hopdong` int NOT NULL AUTO_INCREMENT,
   `thuyenvien_id` int NOT NULL,
   `hopdong_id` int NOT NULL,
   `ngayky` datetime NOT NULL,
   `ngayhethan` datetime NOT NULL,
   `trangthaihopdong` varchar(45) NOT NULL,
   `hinhanh` varchar(100) NOT NULL,
-  PRIMARY KEY (`id_thuyenvien_hopdong`),
+  PRIMARY KEY (`id_hopdong`),
   KEY `chitiet_hopdong_thuyenvien_idx` (`thuyenvien_id`),
-  KEY `chitiet_hopdong_idx` (`hopdong_id`),
-  CONSTRAINT `tvhd_hopdong` FOREIGN KEY (`hopdong_id`) REFERENCES `hopdong` (`id_hopdong`),
   CONSTRAINT `tvhd_thuyenvien` FOREIGN KEY (`thuyenvien_id`) REFERENCES `thuyenvien` (`id_thuyenvien`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

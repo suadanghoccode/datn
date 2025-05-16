@@ -2,32 +2,19 @@
 
 module.exports = {
     up: async (queryInterface, Sequelize) => {
-        await queryInterface.createTable('thuyenvien_hopdong', {
-            id_thuyenvien_hopdong: {
-                allowNull: false,
+        await queryInterface.createTable('hopdong', {
+            id_hopdong: {
+                type: Sequelize.INTEGER,
                 autoIncrement: true,
-                primaryKey: true,
-                type: Sequelize.INTEGER
+                primaryKey: true
             },
             thuyenvien_id: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'thuyenvien', // Tên bảng trong DB
-                    key: 'id_thuyenvien'
-                },
-                onUpdate: 'CASCADE',
-                onDelete: 'CASCADE'
+                allowNull: false
             },
             hopdong_id: {
                 type: Sequelize.INTEGER,
-                allowNull: false,
-                references: {
-                    model: 'hopdong', // Tên bảng trong DB
-                    key: 'id_hopdong'
-                },
-                onUpdate: 'CASCADE',
-                onDelete: 'CASCADE'
+                allowNull: false
             },
             ngayky: {
                 type: Sequelize.DATE,
@@ -56,9 +43,22 @@ module.exports = {
                 defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
             }
         });
+
+        // Foreign key
+        await queryInterface.addConstraint('hopdong', {
+            fields: ['thuyenvien_id'],
+            type: 'foreign key',
+            name: 'tvhd_thuyenvien',
+            references: {
+                table: 'thuyenvien',
+                field: 'id_thuyenvien'
+            },
+            onUpdate: 'CASCADE',
+            onDelete: 'RESTRICT'
+        });
     },
 
     down: async (queryInterface, Sequelize) => {
-        await queryInterface.dropTable('thuyenvien_hopdong');
+        await queryInterface.dropTable('hopdong');
     }
 };
