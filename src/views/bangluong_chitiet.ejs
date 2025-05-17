@@ -198,18 +198,20 @@
                                 <option value="1-2025">Tháng 1/2025</option>
                             </select>
                         </div>
+
+                        <!-- Cột chứa nút -->
                     </div>
 
                     <!-- Tab nút -->
                     <ul class="nav nav-tabs mb-3" id="mainTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="crew-tab" data-bs-toggle="tab" data-bs-target="#crew"
+                            <button class="nav-link" id="crew-tab" data-bs-toggle="tab" data-bs-target="#crew"
                                 type="button" role="tab">
                                 🧭 Thuyền viên đang trên tàu
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link " id="salary-tab" data-bs-toggle="tab"
+                            <button class="nav-link active" id="salary-tab" data-bs-toggle="tab"
                                 data-bs-target="#salary" type="button" role="tab">
                                 💰 Bảng lương
                             </button>
@@ -218,107 +220,190 @@
 
                     <!-- Tab nội dung -->
                     <div class="tab-content">
-                        <div class="tab-pane fade" id="crew" role="tabpanel">Nội dung thuyền viên...</div>
+                        <div class="tab-pane fade" id="crew" role="tabpanel">
+                            Nội dung thuyền viên...
+                        </div>
+
                         <div class="tab-pane fade show active" id="salary" role="tabpanel">
                             <div class="card shadow">
                                 <div class="card-header py-3 d-flex justify-content-between align-items-center">
-                                    <h6 class="m-0 font-weight-bold text-primary">Danh sách bảng lương</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Bảng lương chi tiết</h6>
 
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered text-center" id="dataTable">
-                                            <thead class="table-dark">
-                                                <tr>
-                                                    </th>
-                                                    <th>Họ Tên</th>
-                                                    <th>Ngày lên tàu</th>
-                                                    <th>Ngày xuống tàu</th>
-                                                    <th>Tháng</th>
-                                                    <th>Thao Tác</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="salaryTable">
-                                                <tr data-month="3-2025">
-                                                    <td>Nguyễn Văn A</td>
-                                                    <td>20/4/2025</td>
-                                                    <td>20/5/2025</td>
-                                                    <td>Tháng 3/2025</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm"
-                                                            onclick="capNhatLuong(this)">Thêm bảng lương</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <!-- Bọc 2 nút trong một div để căn phải -->
+                                    <div>
+                                        <button class="btn btn-success btn-sm me-2" onclick="">Cập nhật</button>
+                                        <button class="btn btn-warning btn-sm" onclick="">Xuất phiếu lương</button>
+                                        <button type="button" class="btn btn-danger btn-sm" data-toggle="modal"
+                                            data-target="#uploadPdfModal">
+                                            Thanh toán
+                                        </button>
+
+                                        <div class="modal fade" id="uploadPdfModal" tabindex="-1" role="dialog"
+                                            aria-labelledby="uploadPdfModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <form id="uploadPdfForm" enctype="multipart/form-data" method="POST"
+                                                    action="/upload-signed-pdf">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title text-primary" id="uploadPdfModalLabel">Tải lên
+                                                                phiếu lương đã ký</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Đóng">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <input type="file" name="signedPdf" accept="application/pdf"
+                                                                required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Hủy</button>
+                                                            <button type="submit" class="btn btn-primary">Tải lên và
+                                                                thanh toán</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
+
+                                <div class="card-body">
+                                    <table class="table table-bordered table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Họ và tên</th>
+                                                <td>Nguyễn Văn A</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Trạng thái thuyền viên</th>
+                                                <td>Đang trên tàu</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Thời gian lên tàu</th>
+                                                <td>12:00 PM 15/06/2024</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Thời gian xuất cảnh</th>
+                                                <td>11:00 PM 15/06/2024</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Thời gian xuống tàu</th>
+                                                <td>--</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Số ngày công</th>
+                                                <td>30</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tháng</th>
+                                                <td>03/2025</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Phương thức tính lương</th>
+                                                <td>Theo ngày xuất cảnh</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Lương cơ bản</th>
+                                                <td>22,000 USD</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Hệ số quy đổi</th>
+                                                <td>1.2</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Số tài khoản</th>
+                                                <td>+84 912345678</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Ngân hàng</th>
+                                                <td>VietinBank</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tổng lương</th>
+                                                <td>30.000.000 VNĐ</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Trạng thái bảng lương</th>
+                                                <td>Chưa thanh toán</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">PDF</th>
+                                                <td>bangluong.pdf</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
 
 
+
+
                 </div>
 
+                <footer class="sticky-footer bg-white">
+                    <div class="container my-auto">
+                        <div class="copyright text-center my-auto">
+                            <span>Copyright &copy; PITSCO Crew Management System 2025 </span>
+                        </div>
+                    </div>
+                </footer>
 
             </div>
 
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; PITSCO Crew Management System 2025 </span>
+        </div>
+
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Bạn chắc chắc muốn rời đi?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Chọn "Đăng xuất" bên dưới nếu bạn sẵn sàng kết thúc phiên hiện tại của mình.
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                        <a class="btn btn-primary" href="/login">Đăng xuất</a>
                     </div>
                 </div>
-            </footer>
-
-        </div>
-
-    </div>
-
-    <a class="scroll-to-top rounded" href="#page-top">
-        <i class="fas fa-angle-up"></i>
-    </a>
-
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Bạn chắc chắc muốn rời đi?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Chọn "Đăng xuất" bên dưới nếu bạn sẵn sàng kết thúc phiên hiện tại của mình.
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                    <a class="btn btn-primary" href="/login">Đăng xuất</a>
-                </div>
             </div>
         </div>
-    </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("filterMonth").value = "3-2025";
-            filterByMonth();
-        });
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                document.getElementById("filterMonth").value = "3-2025";
+                filterByMonth();
+            });
 
-        function themLuong() {
-            window.location.href = '/payroll-add';
-        }
-    </script>
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+            function themLuong() {
+                window.location.href = '/payroll-add';
+            }
+        </script>
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <script src="js/style.js"></script>
+        <script src="js/style.js"></script>
 
-    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+        <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
-    <script src="js/demo/datatables-demo.js"></script>
+        <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 

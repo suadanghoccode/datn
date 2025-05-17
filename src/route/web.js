@@ -3,6 +3,7 @@ import ChungChiController from '../controllers/ChungChiController';
 import UserController from '../controllers/UserController';
 import ThuyenVienController from '../controllers/ThuyenVienController';
 import HopDongController from '../controllers/HopDongController';
+import BangLuongController from '../controllers/BangLuongController'
 const router = express.Router();
 
 const initWebRoutes = (app) => {
@@ -20,8 +21,11 @@ const initWebRoutes = (app) => {
     router.post('/delete-chungchi', ChungChiController.deleteChungChi);
 
     //bảng lương ở đây
-    router.get('/danh-sach-bang-luong', UserController.getBangLuong);
-    router.get('/danh-sach-thuyen-vien-dang-tren-tau', UserController.getThuyenVienBangLuong);
+    router.get('/danh-sach-bang-luong', BangLuongController.getBangLuong);
+    router.get('/danh-sach-thuyen-vien-dang-tren-tau', BangLuongController.getThuyenVienBangLuong);
+    router.get('/chi-tiet-bang-luong', BangLuongController.getChiTietBangLuong);
+    router.get('/them-bang-luong', BangLuongController.getThemBangLuong);
+    router.get('/cap-nhat-bang-luong', BangLuongController.getCapNhatBangLuong);
     app.use("/", router);
 
 
