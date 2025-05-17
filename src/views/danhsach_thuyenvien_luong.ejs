@@ -198,20 +198,18 @@
                                 <option value="1-2025">Tháng 1/2025</option>
                             </select>
                         </div>
-
-                        <!-- Cột chứa nút -->
                     </div>
 
                     <!-- Tab nút -->
                     <ul class="nav nav-tabs mb-3" id="mainTabs" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="crew-tab" data-bs-toggle="tab" data-bs-target="#crew"
+                            <button class="nav-link active" id="crew-tab" data-bs-toggle="tab" data-bs-target="#crew"
                                 type="button" role="tab">
                                 🧭 Thuyền viên đang trên tàu
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="salary-tab" data-bs-toggle="tab"
+                            <button class="nav-link " id="salary-tab" data-bs-toggle="tab"
                                 data-bs-target="#salary" type="button" role="tab">
                                 💰 Bảng lương
                             </button>
@@ -224,7 +222,7 @@
                         <div class="tab-pane fade show active" id="salary" role="tabpanel">
                             <div class="card shadow">
                                 <div class="card-header bg-primary text-white">
-                                    <h5 class="m-0">📋 Danh sách bảng lương</h5>
+                                    <h5 class="m-0">📋 Danh sách thuyền viên đang trên tàu</h5>
                                 </div>
                                 <div class="card-body">
                                     <div class="table-responsive">
@@ -235,10 +233,6 @@
                                                     <th>Họ Tên</th>
                                                     <th>Ngày lên tàu</th>
                                                     <th>Ngày xuống tàu</th>
-                                                    <th>Số ngày công</th>
-                                                    <th>Lương Cơ Bản</th>
-                                                    <th>Hệ số quy đổi</th>
-                                                    <th>Tổng Lương (VND)</th>
                                                     <th>Tháng</th>
                                                     <th>Thao Tác</th>
                                                 </tr>
@@ -248,14 +242,10 @@
                                                     <td>Nguyễn Văn A</td>
                                                     <td>20/4/2025</td>
                                                     <td>20/5/2025</td>
-                                                    <td>30 ngày</td>
-                                                    <td>15,000 USD</td>
-                                                    <td>22,000</td>
-                                                    <td>330,000,000 VND</td>
                                                     <td>Tháng 3/2025</td>
                                                     <td>
                                                         <button class="btn btn-primary btn-sm"
-                                                            onclick="capNhatLuong(this)">Cập Nhật</button>
+                                                            onclick="capNhatLuong(this)">Thêm bảng lương</button>
                                                     </td>
                                                 </tr>
                                             </tbody>

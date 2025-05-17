@@ -23,6 +23,7 @@
 <body id="page-top">
 
     <div id="wrapper">
+
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/dashboard">
                 <div class="sidebar-brand-icon logo">
@@ -36,7 +37,7 @@
                     <i class="fas fa-home"></i>
                     <span>Bảng điều khiển</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link" href="/users">
                     <i class="fas fa-user-shield"></i>
                     <span>Danh sách tài khoản</span></a>
@@ -63,7 +64,7 @@
                 </div>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item active">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
@@ -78,12 +79,12 @@
                 </div>
             </li>
             <hr class="sidebar-divider my-0">
-            <li class="nav-item active">
+            <li class="nav-item">
                 <a class="nav-link" href="/payroll">
                     <i class="fas fa-money-bill-wave"></i>
                     <span>Bảng lương</span></a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item ">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-archive"></i>
@@ -91,9 +92,9 @@
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="/list-job">Danh sách chức danh</a>
-                        <a class="collapse-item" href="/list-ship">Danh sách tàu</a>
-                        <a class="collapse-item" href="/list-cer">Danh sách chứng chỉ</a>
+                        <a class="collapse-item" href="/danh-sach-chuc-vu">Danh sách chức danh</a>
+                        <a class="collapse-item" href="/danh-sach-tau">Danh sách tàu</a>
+                        <a class="collapse-item" href="/danh-sach-chung-chi">Danh sách chứng chỉ</a>
                     </div>
                 </div>
             </li>
@@ -106,7 +107,9 @@
         </ul>
 
         <div id="content-wrapper" class="d-flex flex-column">
+
             <div id="content">
+
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                         <i class="fa fa-bars"></i>
@@ -141,7 +144,7 @@
                                         </div>
                                     </div>
                                     <div>
-                                        <div class="small text-gray-500">19/3/2025</div>
+                                        <div class="small text-gray-500">19/3/2024</div>
                                         Có 1 chứng chỉ sắp hết hạn
                                     </div>
                                 </a>
@@ -182,93 +185,61 @@
                     </ul>
 
                 </nav>
+
                 <div class="container-fluid">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Bảng Lương Thuyền Viên</h1>
-                    </div>
-                    <!-- Bộ lọc tháng -->
-                    <div class="row align-items-end justify-content-between mb-4">
-                        <!-- Cột chọn tháng -->
-                        <div class="col-md-4">
-                            <label for="filterMonth" class="form-label fw-semibold text-primary">📅 Chọn tháng:</label>
-                            <select id="filterMonth" class="form-select shadow-sm border-primary"
-                                onchange="filterByMonth()">
-                                <option value="3-2025">Tháng 3/2025</option>
-                                <option value="2-2025">Tháng 2/2025</option>
-                                <option value="1-2025">Tháng 1/2025</option>
-                            </select>
+
+                    <h1 class="h3 mb-2 text-gray-800">Danh sách hợp đồng</h1>
+                    <div class="card shadow mt-3">
+                        <div
+                            class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h5 class="m-0">Hợp đồng</h5>
+                            <div>
+                                <button class="btn btn-light btn-sm" onclick="xoaChon()">🗑️ Xóa</button>
+                                <button class="btn btn-light btn-sm" onclick="themChucDanh()">+ Thêm</button>
+                            </div>
                         </div>
-
-                        <!-- Cột chứa nút -->
-                    </div>
-
-                    <!-- Tab nút -->
-                    <ul class="nav nav-tabs mb-3" id="mainTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="crew-tab" data-bs-toggle="tab" data-bs-target="#crew"
-                                type="button" role="tab">
-                                🧭 Thuyền viên đang trên tàu
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="salary-tab" data-bs-toggle="tab"
-                                data-bs-target="#salary" type="button" role="tab">
-                                💰 Bảng lương
-                            </button>
-                        </li>
-                    </ul>
-
-                    <!-- Tab nội dung -->
-                    <div class="tab-content">
-                        <div class="tab-pane fade" id="crew" role="tabpanel">Nội dung thuyền viên...</div>
-                        <div class="tab-pane fade show active" id="salary" role="tabpanel">
-                            <div class="card shadow">
-                                <div class="card-header bg-primary text-white">
-                                    <h5 class="m-0">📋 Danh sách bảng lương</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered text-center" id="dataTable">
-                                            <thead class="table-dark">
-                                                <tr>
-                                                    </th>
-                                                    <th>Họ Tên</th>
-                                                    <th>Ngày lên tàu</th>
-                                                    <th>Ngày xuống tàu</th>
-                                                    <th>Số ngày công</th>
-                                                    <th>Lương Cơ Bản</th>
-                                                    <th>Hệ số quy đổi</th>
-                                                    <th>Tổng Lương (VND)</th>
-                                                    <th>Tháng</th>
-                                                    <th>Thao Tác</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="salaryTable">
-                                                <tr data-month="3-2025">
-                                                    <td>Nguyễn Văn A</td>
-                                                    <td>20/4/2025</td>
-                                                    <td>20/5/2025</td>
-                                                    <td>30 ngày</td>
-                                                    <td>15,000 USD</td>
-                                                    <td>22,000</td>
-                                                    <td>330,000,000 VND</td>
-                                                    <td>Tháng 3/2025</td>
-                                                    <td>
-                                                        <button class="btn btn-primary btn-sm"
-                                                            onclick="capNhatLuong(this)">Cập Nhật</button>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 5%;"><input type="checkbox" id="checkAll"
+                                                    onclick="chonTatCa(this)"></th>
+                                            <th style="width: 10%;">Mã thuyền viên</th>
+                                            <th>Tên thuyền viên</th>
+                                            <th>Số hợp đồng</th>
+                                            <th>Ngày kí</th>
+                                            <th>Ngày hết hạn</th>
+                                            <th>Trạng thái hợp đồng</th>
+                                            <th>Hình ảnh</th>
+                                            <th style="width: 20%;">Hành động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="danhSach">
+                                        
+                                        <tr onclick="chonDong(this, event)">
+                                            <td><input type="checkbox" class="row-checkbox"></td>
+                                            <td>1</td>
+                                            <td>A</td>
+                                            <td>1</td>
+                                            <td>16/5/2025</td>
+                                            <td>16/5/2026</td>
+                                            <td>Có hiệu lực</td>
+                                            <td>hongdong.pdf</td>
+                                            <td>
+                                                <button class="btn btn-warning btn-sm"
+                                                    onclick="suaChucDanh(this)">Sửa</button>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
 
 
                 </div>
-
 
             </div>
 
@@ -307,16 +278,7 @@
             </div>
         </div>
     </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            document.getElementById("filterMonth").value = "3-2025";
-            filterByMonth();
-        });
 
-        function themLuong() {
-            window.location.href = '/payroll-add';
-        }
-    </script>
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

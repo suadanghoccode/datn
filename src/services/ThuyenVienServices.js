@@ -1,10 +1,10 @@
 import db from '../models/index';
 
-let createNewChungChi = async(data) => {
+let createNewThuyenVien = async(data) => {
     return new Promise(async(resolve, reject) => {
         try {
-            const result = await db.Chungchi.create({
-                tenchungchi: data.tenchungchi,
+            const result = await db.Thuyenvien.create({
+                tenthuyenvien: data.tenthuyenvien,
                 tieuchuanapdung: data.tieuchuanapdung
             })
             resolve(result);
@@ -14,27 +14,27 @@ let createNewChungChi = async(data) => {
     })
 
 }
-let getAllChungChi = () => {
+let getAllThuyenVien = () => {
     return new Promise(async(resolve, reject) => {
         try{
-            let chungchis = db.Chungchi.findAll({
+            let thuyenviens = db.Thuyenvien.findAll({
                 raw:true,
             });
-            resolve(chungchis);
+            resolve(thuyenviens);
         }catch(e){
             reject(e);
         }
     })
     
 }
-let getChungChiId = (chungchi_id) => {
+let getThuyenVienId = (thuyenvien_id) => {
     return new Promise (async(resolve, reject) => {
         try {
-            let chungchi = await db.Chungchi.findOne({
-                where : {id : chungchi_id}
+            let thuyenvien = await db.Thuyenvien.findOne({
+                where : {id : thuyenvien_id}
             })
-            if (chungchi){
-                resolve (chungchi);
+            if (thuyenvien){
+                resolve (thuyenvien);
             }else {
                 resolve ([]);
             }
@@ -44,16 +44,16 @@ let getChungChiId = (chungchi_id) => {
     })
 }
 
-let updateChungChiData = (data) => {
+let updateThuyenVienData = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            await db.Chungchi.update(
+            await db.Thuyenvien.update(
                 {
-                    tenchungchi: data.tenchungchi,
+                    tenthuyenvien: data.tenthuyenvien,
                     tieuchuanapdung: data.tieuchuanapdung
                 },
                 {
-                    where: { id_chungchi: data.id_chungchi }
+                    where: { id_thuyenvien: data.id_thuyenvien }
                 }
             );
             resolve('Cập nhật thành công!');
@@ -63,14 +63,14 @@ let updateChungChiData = (data) => {
         }
     });
 }
-let deleteChungChi = (chungchi_id) => {
+let deleteThuyenVien = (thuyenvien_id) => {
     return new Promise(async (resolve, reject) => {
         try{
-            let chungchi = await db.Chungchi.findOne({
-                where: {id_chungchi:chungchi_id}
+            let thuyenvien = await db.Thuyenvien.findOne({
+                where: {id_thuyenvien:thuyenvien_id}
             })
-            if(chungchi ){
-                await chungchi.destroy();
+            if(thuyenvien ){
+                await thuyenvien.destroy();
             }
             resolve();
         }catch(e){
@@ -79,9 +79,9 @@ let deleteChungChi = (chungchi_id) => {
     })
 }
 module.exports = {
-    createNewChungChi: createNewChungChi,
-    getAllChungChi : getAllChungChi,
-    getChungChiId : getChungChiId,
-    updateChungChiData: updateChungChiData,
-    deleteChungChi: deleteChungChi
+    createNewThuyenVien: createNewThuyenVien,
+    getAllThuyenVien : getAllThuyenVien,
+    getThuyenVienId : getThuyenVienId,
+    updateThuyenVienData: updateThuyenVienData,
+    deleteThuyenVien: deleteThuyenVien
 }

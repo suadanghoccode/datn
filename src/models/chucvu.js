@@ -2,26 +2,24 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-    class Chungchi extends Model {
+    class Chucvu extends Model {
         static associate(models) {
-            // define association here
+            
         }
     }
 
-    Chungchi.init({
-        id_chungchi: {
+    Chucvu.init({
+        id_chucvu: {
             type: DataTypes.INTEGER,
             primaryKey: true,          
             autoIncrement: true        
         },
-        tenchungchi: DataTypes.STRING,
-        tieuchuanapdung: DataTypes.STRING
+        tenchucvu: DataTypes.STRING,
     }, {
         sequelize,
-        tableName: 'chungchi',
-        modelName: 'Chungchi',      
+        modelName: 'chucvu',      
         freezeTableName: true      
     });
 
-    return Chungchi;
+    return Chucvu;
 };
