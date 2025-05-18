@@ -1,10 +1,16 @@
 'use strict';
-const { Model } = require('sequelize');
+const {
+    Model
+} = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
     class Thuyenvien extends Model {
         static associate(models) {
-            
+            // Một thuyền viên có nhiều hợp đồng
+            Thuyenvien.hasMany(models.Hopdong, {
+                foreignKey: 'thuyenvien_id',
+                as: 'hopdongs'
+            });
         }
     }
 

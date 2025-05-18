@@ -24,6 +24,10 @@ module.exports = {
                 type: Sequelize.DATE,
                 allowNull: false
             },
+            ngaythanhly: {
+                type: Sequelize.DATE,
+                allowNull: true
+            },
             trangthaihopdong: {
                 type: Sequelize.STRING(45),
                 allowNull: false

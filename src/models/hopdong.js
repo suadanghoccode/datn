@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
             // Quan hệ: hợp đồng thuộc về 1 thuyền viên
             Hopdong.belongsTo(models.Thuyenvien, {
                 foreignKey: 'thuyenvien_id',
+                targetKey: 'id_thuyenvien',
                 as: 'thuyenvien'
             });
         }
@@ -22,10 +23,6 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER,
             allowNull: false
         },
-        hopdong_id: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         ngayky: {
             type: DataTypes.DATE,
             allowNull: false
@@ -33,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         ngayhethan: {
             type: DataTypes.DATE,
             allowNull: false
+        },
+        ngaythanhly: {
+            type: DataTypes.DATE,
+            allowNull: true
         },
         trangthaihopdong: {
             type: DataTypes.STRING(45),
@@ -48,7 +49,8 @@ module.exports = (sequelize, DataTypes) => {
         freezeTableName: true,
         tableName: 'hopdong',
         charset: 'utf8mb4',
-        collate: 'utf8mb4_0900_ai_ci'
+        collate: 'utf8mb4_0900_ai_ci',
+        
     });
 
     return Hopdong;

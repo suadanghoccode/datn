@@ -193,61 +193,9 @@
                     <div class="card shadow mt-3">
                         <div
                             class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                            <h5 class="m-0">Hợp đồng có hiệu lực</h5>
+                            <h5 class="m-0">Hợp đồng chờ thanh lý</h5>
                             <div>
                                 <button class="btn btn-light btn-sm" onclick="xoaChon()">🗑️ Xóa</button>
-                                <button class="btn btn-light btn-sm" data-toggle="modal"
-                                    data-target="#themHopDongModal">+ Thêm</button>
-                            </div>
-                            <!-- Modal thêm hợp đồng -->
-                            <div class="modal fade" id="themHopDongModal" tabindex="-1" role="dialog"
-                                aria-labelledby="themHopDongLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header bg-primary text-white">
-                                            <h5 class="modal-title" id="themHopDongLabel">Thêm Hợp Đồng</h5>
-                                            <button type="button" class="close text-white" data-dismiss="modal"
-                                                aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <form id="formThemHopDong" action="/post-hop-dong" method="POST"
-                                                enctype="multipart/form-data">
-                                                <div class="form-group">
-                                                    <label for="maThuyenVien" class="text-primary">Mã thuyền
-                                                        viên</label>
-                                                    <input type="text" class="form-control" id="maThuyenVien"
-                                                        name="thuyenvien_id" required>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="ngayKi" class="text-primary">Ngày kí</label>
-                                                    <input type="text" class="form-control" id="ngayKi" name="ngayky"
-                                                        placeholder="dd/MM/yyyy" required>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label for="ngayHetHan" class="text-primary">Ngày hết hạn</label>
-                                                    <input type="text" class="form-control" id="ngayHetHan"
-                                                        name="ngayhethan" placeholder="dd/MM/yyyy" required>
-                                                </div>
-                                                <select class="form-control" id="trangThai"
-                                                    name="trangthaihopdong_display" disabled>
-                                                    <option value="Có hiệu lực" selected>Có hiệu lực</option>
-                                                </select>
-                                                <input type="hidden" name="trangthaihopdong" value="Có hiệu lực" />
-                                                <div class="form-group">
-                                                    <label for="hinhanh" class="text-primary">Hợp đồng
-                                                        (PDF)</label>
-                                                    <input type="file" class="form-control" id="hinhanh" name="hinhanh"
-                                                        accept=".pdf" required>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Lưu</button>
-                                            </form>
-                                        </div>
-
-                                    </div>
-                                </div>
                             </div>
 
                         </div>
@@ -317,7 +265,10 @@
                                                     data-file="<%= dataTable[i].hinhanh %>">
                                                     Sửa
                                                 </button>
-
+                                                <button class="btn btn-danger btn-sm me-2 btn-thanh-ly"
+                                                    data-id="<%= dataTable[i].id_hopdong %>">
+                                                    Thanh lý
+                                                </button>
                                             </td>
                                         </tr>
                                         <% } %>
@@ -346,14 +297,14 @@
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="ngayKi" class="text-primary">Ngày kí</label>
-                                                                <input type="text" class="form-control" id="ngayKi" name="ngayKi"
-                                                                    required >
+                                                                <input type="text" class="form-control" id="ngayKi"
+                                                                    name="ngayKi" required>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="ngayHetHan" class="text-primary">Ngày hết
                                                                     hạn</label>
-                                                                <input type="text" class="form-control" id="ngayHetHan" name="ngayHetHan"
-                                                                    required  >
+                                                                <input type="text" class="form-control" id="ngayHetHan"
+                                                                    name="ngayHetHan" required>
                                                             </div>
 
                                                             <div class="form-group">
@@ -506,6 +457,34 @@
                     alert('Có lỗi xảy ra khi xóa.');
                 });
         }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.btn-thanh-ly').forEach(button => {
+                button.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    if (confirm('Bạn có chắc muốn thanh lý hợp đồng này không?')) {
+                        fetch('/thuc-hien-thanh-ly', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    idHopDong: id
+                                })
+                            })
+                            .then(res => res.json())
+                            .then(data => {
+                                alert(data.message);
+                                location.reload(); // Refresh lại trang
+                            })
+                            .catch(err => {
+                                console.error(err);
+                                alert('Có lỗi xảy ra!');
+                            });
+                    }
+                });
+            });
+        });
     </script>
 
 
